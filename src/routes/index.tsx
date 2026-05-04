@@ -184,8 +184,9 @@ function Hero() {
         </motion.p>
 
         <h1 className="font-display text-4xl leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl">
-          <span className="block">Stop unsafe software changes</span>
-          <span className="gradient-text block italic">before they reach production.</span>
+          <span className="block">
+            Stop unsafe human, AI-generated, and agent-executed changes before they reach production.
+          </span>
         </h1>
 
         <motion.p
