@@ -428,16 +428,49 @@ function UseCases() {
 }
 
 function Contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
+  const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
+
+    const formData = {
+      name,
+      email,
+      company,
+      message,
+    };
+
+    try {
+      const res = await fetch("https://4yka445exg.execute-api.eu-north-1.amazonaws.com/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        toast.success("Message sent.");
+        setName("");
+        setEmail("");
+        setCompany("");
+        setMessage("");
+      } else {
+        toast.error("Failed.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Error.");
+    } finally {
       setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-      toast.success("Thanks — we'll be in touch within a day.");
-    }, 700);
+    }
   };
 
   return (
@@ -461,24 +494,53 @@ function Contact() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className="mb-2 block text-sm font-medium">Name</label>
-                  <Input id="name" name="name" required className="h-12 rounded-lg bg-background transition-shadow focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_15%,transparent)]" />
+                  <Input
+                    id="name"
+                    name="name"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="h-12 rounded-lg bg-background transition-shadow focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_15%,transparent)]"
+                  />
                 </div>
                 <div>
                   <label htmlFor="company" className="mb-2 block text-sm font-medium">Company</label>
-                  <Input id="company" name="company" className="h-12 rounded-lg bg-background transition-shadow focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_15%,transparent)]" />
+                  <Input
+                    id="company"
+                    name="company"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    className="h-12 rounded-lg bg-background transition-shadow focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_15%,transparent)]"
+                  />
                 </div>
               </div>
               <div>
                 <label htmlFor="email" className="mb-2 block text-sm font-medium">Email</label>
-                <Input id="email" name="email" type="email" required className="h-12 rounded-lg bg-background transition-shadow focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_15%,transparent)]" />
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="h-12 rounded-lg bg-background transition-shadow focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_15%,transparent)]"
+                />
               </div>
               <div>
                 <label htmlFor="message" className="mb-2 block text-sm font-medium">How can we help?</label>
-                <Textarea id="message" name="message" required rows={5} className="rounded-lg bg-background transition-shadow focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_15%,transparent)]" />
+                <Textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={5}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="rounded-lg bg-background transition-shadow focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_15%,transparent)]"
+                />
               </div>
               <MagneticButton>
                 <Button type="submit" size="lg" disabled={submitting} className="group rounded-full px-7">
-                  {submitting ? "Sending…" : "Send message"}
+                  {submitting ? "Sending..." : "Send message"}
                   {!submitting && <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />}
                 </Button>
               </MagneticButton>
@@ -496,7 +558,7 @@ function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-10">
         <div className="flex items-center gap-3 text-sm">
           <ZeroUiWordmark className="!text-xl" />
-          <span className="text-muted-foreground">© {new Date().getFullYear()}</span>
+          <span className="text-muted-foreground">{"\u00A9"} {new Date().getFullYear()}</span>
         </div>
         <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted-foreground">
           <a href="#services" className="link-underline hover:text-foreground">Product</a>
