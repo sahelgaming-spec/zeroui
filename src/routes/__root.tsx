@@ -31,9 +31,9 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ZeroUI — The trust layer for AI-native software delivery" },
+      { title: "ZeroUI - The trust layer for AI-native software delivery" },
       { name: "description", content: "ZeroUI is the trust layer for AI-native software delivery." },
-      { property: "og:title", content: "ZeroUI — The trust layer for AI-native software delivery" },
+      { property: "og:title", content: "ZeroUI - The trust layer for AI-native software delivery" },
       { property: "og:description", content: "The trust layer for AI-native software delivery." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
