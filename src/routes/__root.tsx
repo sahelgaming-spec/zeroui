@@ -31,11 +31,17 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "robots", content: "index, follow" },
+      { name: "googlebot", content: "index, follow" },
+      { name: "geo.region", content: "US" },
+      { name: "language", content: "English" },
       { title: "ZeroUI — AI agent PR governance for GitHub, GitLab, and Azure DevOps" },
       { name: "description", content: "Stop AI agent PRs from merging without the right policy, reviewer, and evidence trail. Connects via webhook to GitHub, GitLab, and Azure DevOps. No marketplace install required." },
       { property: "og:title", content: "AI agent opened a PR. Did the right person review it?" },
       { property: "og:description", content: "AI agent PR governance via webhook — GitHub, GitLab, and Azure DevOps. Policy enforcement, reviewer routing, and evidence trail. No marketplace install." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.zeroui.dev" },
+      { property: "og:site_name", content: "ZeroUI" },
       { property: "og:image", content: "/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
@@ -45,6 +51,11 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: "/og-image.png" },
     ],
     links: [
+      { rel: "canonical", href: "https://www.zeroui.dev" },
+      { rel: "alternate", hreflang: "en-us", href: "https://www.zeroui.dev" },
+      { rel: "alternate", hreflang: "en-gb", href: "https://www.zeroui.dev" },
+      { rel: "alternate", hreflang: "en-eu", href: "https://www.zeroui.dev" },
+      { rel: "alternate", hreflang: "x-default", href: "https://www.zeroui.dev" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" },
@@ -58,9 +69,41 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-US">
+      {/* For European SEO we may want hreflang tags later. */}
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              name: "ZeroUI",
+              applicationCategory: "DeveloperApplication",
+              operatingSystem: "GitHub, GitLab, Azure DevOps",
+              description:
+                "AI agent PR governance platform. Connects via webhook to detect agent-authored PRs, enforce policy, route reviews, and log evidence trails.",
+              offers: {
+                "@type": "Offer",
+                availability: "https://schema.org/PreOrder",
+                price: "0",
+                priceCurrency: "USD",
+              },
+              url: "https://www.zeroui.dev",
+              applicationSubCategory: "DevSecOps",
+              featureList: [
+                "AI agent PR detection",
+                "Policy-as-code enforcement",
+                "Automated reviewer routing",
+                "Tamper-evident evidence trail",
+                "GitHub webhook integration",
+                "GitLab webhook integration",
+                "Azure DevOps webhook integration",
+              ],
+            }),
+          }}
+        />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-6DJ093H0LW"></script>
         <script
           dangerouslySetInnerHTML={{
