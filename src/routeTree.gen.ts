@@ -10,33 +10,54 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogCodeownersVsAiAgentsRouteImport } from './routes/blog/codeowners-vs-ai-agents'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogCodeownersVsAiAgentsRoute =
+  BlogCodeownersVsAiAgentsRouteImport.update({
+    id: '/blog/codeowners-vs-ai-agents',
+    path: '/blog/codeowners-vs-ai-agents',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog/codeowners-vs-ai-agents': typeof BlogCodeownersVsAiAgentsRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog/codeowners-vs-ai-agents': typeof BlogCodeownersVsAiAgentsRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog/codeowners-vs-ai-agents': typeof BlogCodeownersVsAiAgentsRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/blog/codeowners-vs-ai-agents' | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/blog/codeowners-vs-ai-agents' | '/blog'
+  id: '__root__' | '/' | '/blog/codeowners-vs-ai-agents' | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogCodeownersVsAiAgentsRoute: typeof BlogCodeownersVsAiAgentsRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +69,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/codeowners-vs-ai-agents': {
+      id: '/blog/codeowners-vs-ai-agents'
+      path: '/blog/codeowners-vs-ai-agents'
+      fullPath: '/blog/codeowners-vs-ai-agents'
+      preLoaderRoute: typeof BlogCodeownersVsAiAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogCodeownersVsAiAgentsRoute: BlogCodeownersVsAiAgentsRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

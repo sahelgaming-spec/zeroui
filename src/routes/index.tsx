@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import {
   Menu,
@@ -35,6 +35,7 @@ export const Route = createFileRoute("/")({
 const NAV = [
   { label: "How it works", href: "#services" },
   { label: "Use cases", href: "#use-cases" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -55,15 +56,26 @@ function Nav() {
         </a>
 
         <nav className="hidden items-center gap-10 md:flex">
-          {NAV.map((item) => (
-            <button
-              key={item.href}
-              onClick={() => handleClick(item.href)}
-              className="link-underline text-sm text-primary/80 transition-colors hover:text-accent"
-            >
-              {item.label}
-            </button>
-          ))}
+          {NAV.map((item) =>
+            item.href.startsWith("/") ? (
+              <Link
+                key={item.href}
+                to={item.href}
+                className="link-underline text-sm text-primary/80 transition-colors hover:text-accent"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <button
+                key={item.href}
+                type="button"
+                onClick={() => handleClick(item.href)}
+                className="link-underline text-sm text-primary/80 transition-colors hover:text-accent"
+              >
+                {item.label}
+              </button>
+            ),
+          )}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -119,18 +131,37 @@ function Nav() {
             className="overflow-hidden border-t border-border/60 bg-background md:hidden"
           >
             <div className="mx-auto flex max-w-6xl flex-col px-6 py-4">
-              {NAV.map((item, i) => (
-                <motion.button
-                  key={item.href}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * i }}
-                  onClick={() => handleClick(item.href)}
-                  className="border-b border-border/40 py-4 text-left text-base text-foreground last:border-0"
-                >
-                  {item.label}
-                </motion.button>
-              ))}
+              {NAV.map((item, i) =>
+                item.href.startsWith("/") ? (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 * i }}
+                    className="border-b border-border/40 last:border-0"
+                  >
+                    <Link
+                      to={item.href}
+                      onClick={() => setOpen(false)}
+                      className="block py-4 text-left text-base text-foreground"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.button
+                    key={item.href}
+                    type="button"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 * i }}
+                    onClick={() => handleClick(item.href)}
+                    className="border-b border-border/40 py-4 text-left text-base text-foreground last:border-0"
+                  >
+                    {item.label}
+                  </motion.button>
+                ),
+              )}
               <Button onClick={() => handleClick("#contact")} className="mt-4 rounded-full">
                 Request Early Access
               </Button>
@@ -620,6 +651,7 @@ function Footer() {
           <a href="#services" className="link-underline hover:text-foreground">Product</a>
           
           <a href="#use-cases" className="link-underline hover:text-foreground">Use cases</a>
+          <a href="/blog" className="link-underline hover:text-foreground">Blog</a>
           <a href="#contact" className="link-underline hover:text-foreground">Contact</a>
         </nav>
       </div>

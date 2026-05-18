@@ -10,4 +10,22 @@
     <xhtml:link rel="alternate" hreflang="en-gb" href="https://www.zeroui.dev/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zeroui.dev/"/>
   </url>
+  <url>
+    <loc>https://www.zeroui.dev/blog/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://www.zeroui.dev/blog/"/>
+    <xhtml:link rel="alternate" hreflang="en-gb" href="https://www.zeroui.dev/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zeroui.dev/blog/"/>
+  </url>
+  <url>
+    <loc>https://www.zeroui.dev/blog/codeowners-vs-ai-agents</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://www.zeroui.dev/blog/codeowners-vs-ai-agents"/>
+    <xhtml:link rel="alternate" hreflang="en-gb" href="https://www.zeroui.dev/blog/codeowners-vs-ai-agents"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zeroui.dev/blog/codeowners-vs-ai-agents"/>
+  </url>
 </urlset>
