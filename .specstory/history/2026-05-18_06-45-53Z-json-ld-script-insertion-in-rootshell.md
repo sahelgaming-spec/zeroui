@@ -2084,3 +2084,522 @@ Full `public/sitemap.xml` after the update:
   </url>
 </urlset>
 ```
+
+---
+
+_**User**_
+
+"Show me the current full contents of src/routes/blog/codeowners-vs-ai-agents.tsx without editing anything."
+
+---
+
+_**Agent (composer-2)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: d:\Projects\zeroui\src\routes\blog\codeowners-vs-ai-agents.tsx</summary>
+
+</details>
+</tool-use>
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2**</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2)**_
+
+Current full contents of `src/routes/blog/codeowners-vs-ai-agents.tsx`:
+
+```1:79:d:\Projects\zeroui\src\routes\blog\codeowners-vs-ai-agents.tsx
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ThemeToggle } from "@/components/theme-toggle";
+
+export const Route = createFileRoute("/blog/codeowners-vs-ai-agents")({
+  head: () => ({
+    meta: [
+      { title: "CODEOWNERS vs AI agents — ZeroUI" },
+      {
+        name: "description",
+        content:
+          "How CODEOWNERS maps human ownership on a pull request — and why AI-authored changes need an explicit agent-aware policy layer.",
+      },
+    ],
+  }),
+  component: CodeownersVsAiAgentsPost,
+});
+
+function CodeownersVsAiAgentsPost() {
+  return (
+    <div className="min-h-screen bg-background">
+      <header className="border-b border-border/60 bg-background/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5 lg:px-10">
+          <Link to="/blog" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            ← Blog
+          </Link>
+          <ThemeToggle />
+        </div>
+      </header>
+      <article className="mx-auto max-w-3xl px-6 py-16 lg:px-10 lg:py-24">
+        <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">May 18, 2026</p>
+        <h1 className="mt-4 font-display text-4xl tracking-tight text-foreground lg:text-5xl">
+          CODEOWNERS vs AI agents
+        </h1>
+        <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+          CODEOWNERS is one of the best tools we have for mapping <em>people</em> to <em>paths</em>: when a pull request
+          touches a region of the repo, the right humans get requested for review. That model assumes the author is
+          another human on your team — or at least that the change is attributable in the same way as any other
+          contributor account.
+        </p>
+        <div className="mt-12 space-y-6 text-base leading-relaxed text-muted-foreground">
+          <p>
+            AI coding agents break that assumption in subtle ways. The PR might still come from a familiar bot or
+            service account, but the <span className="text-foreground">risk profile</span> is different: velocity is
+            higher, context may be thinner, and the &quot;author&quot; never goes off-call. CODEOWNERS alone does not
+            encode whether the change was agent-generated, which policy version should apply, or what evidence you need
+            in the audit trail beyond &quot;someone with approve rights clicked approve.&quot;
+          </p>
+          <p>
+            In practice, teams end up bolting on manual checklists or informal norms: &quot;if you used Copilot for
+            this file, get an extra pair of eyes.&quot; Norms do not scale across repos, languages, and hundreds of
+            engineers — and they are invisible to compliance when an auditor asks what happened on a specific merge.
+          </p>
+          <p className="text-foreground">
+            Agent-aware governance is not a replacement for ownership rules; it is a layer on top. You still want
+            CODEOWNERS (or equivalent) to express which areas of the system demand human judgment. The missing piece is
+            detection and enforcement at the PR boundary: treat agent-authored changes as a first-class signal, apply
+            policy automatically, route reviews deliberately, and log a tamper-evident record of what was decided and
+            why.
+          </p>
+          <p>
+            ZeroUI is built for that boundary — webhook-native on GitHub, GitLab, and Azure DevOps — so the next time
+            an agent opens a PR against a sensitive path, the right reviewer and evidence trail are not optional
+            extras. They are part of how the repo already works.
+          </p>
+        </div>
+        <p className="mt-12 text-sm text-muted-foreground">
+          <Link to="/blog" className="link-underline text-primary hover:text-primary/90">
+            All posts
+          </Link>
+          {" · "}
+          <Link to="/" className="link-underline hover:text-foreground">
+            Home
+          </Link>
+        </p>
+      </article>
+    </div>
+  );
+}
+```
+
+---
+
+_**User**_
+
+"In src/routes/blog/codeowners-vs-ai-agents.tsx, make the following changes:
+1. Replace the head() meta with:
+typescripthead: () => ({
+  meta: [
+    { title: "Why CODEOWNERS Isn't Enough When Your Developers Are AI Agents — ZeroUI" },
+    {
+      name: "description",
+      content: "CODEOWNERS enforces who reviews code. It doesn't know who wrote it. Here's why that gap matters when AI agents are opening PRs in your repo — and what to do about it.",
+    },
+    { property: "og:title", content: "Why CODEOWNERS Isn't Enough When Your Developers Are AI Agents" },
+    { property: "og:description", content: "CODEOWNERS enforces who reviews code. It doesn't know who wrote it. Here's why that gap matters when AI agents are opening PRs in your repo." },
+  ],
+}),
+2. Replace the entire contents of <article> with:
+tsx<p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">May 18, 2026</p>
+<h1 className="mt-4 font-display text-4xl tracking-tight text-foreground lg:text-5xl">
+  Why CODEOWNERS Isn't Enough When Your Developers Are AI Agents
+</h1>
+<p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+  It started with a Slack message on a Tuesday morning.
+</p>
+<div className="mt-8 space-y-6 text-base leading-relaxed text-muted-foreground">
+  <p>
+    A senior engineer at a fintech startup noticed something odd: a PR touching the payments service had been merged the previous evening. The reviewer was a junior developer who'd approved it in four minutes — at 9pm. The PR had 340 lines of changes across six files.
+  </p>
+  <p>
+    No one had flagged it. CODEOWNERS had fired correctly. The right team was requested as reviewers. A human had approved it.
+  </p>
+  <p>
+    But the code had been written entirely by an AI agent. And the junior developer, under deadline pressure, had assumed a senior had already looked at it.
+  </p>
+  <p>They hadn't.</p>
+
+  <h2 className="pt-6 font-display text-2xl text-foreground">CODEOWNERS Does Exactly What It Was Designed to Do</h2>
+  <p>
+    CODEOWNERS is a well-designed tool. You define which people or teams must approve changes to specific files or directories. GitHub, GitLab, and Azure DevOps all support it. It's been working reliably for years.
+  </p>
+  <p>The problem isn't CODEOWNERS. The problem is that CODEOWNERS was designed for a world where humans wrote all the code.</p>
+  <p>In that world, the question was: <em>Did the right person review this?</em></p>
+  <p>That's still an important question. But it's no longer the only one.</p>
+  <p>
+    The new question is: <em>Did the right person review this, knowing that an AI agent wrote it?</em>
+  </p>
+  <p>Those are different questions. And right now, your pipeline only asks the first one.</p>
+
+  <h2 className="pt-6 font-display text-2xl text-foreground">What CODEOWNERS Can't See</h2>
+  <p>
+    When a Copilot agent, Claude Code, or Devin opens a PR, it looks like any other commit. The author might be a service account, a bot user, or even a developer's own account if they accepted and pushed the suggestion. CODEOWNERS fires based on which files were changed — not who or what changed them.
+  </p>
+  <p>This creates a gap that's invisible until something goes wrong:</p>
+  <ul className="list-disc pl-6 space-y-2">
+    <li>A reviewer sees a PR, assumes a colleague wrote it, and does a surface-level check</li>
+    <li>An agent makes a structural change to auth logic that looks syntactically correct but introduces a logic flaw</li>
+    <li>The policy that should apply to AI-generated changes — require a senior engineer, require two approvals, require a security sign-off — never gets triggered because the pipeline doesn't know the code came from an agent</li>
+  </ul>
+  <p>
+    Your CODEOWNERS file has no concept of provenance. It can't distinguish between a principal engineer's careful refactor and 400 lines generated by an autonomous agent at 2am.
+  </p>
+
+  <h2 className="pt-6 font-display text-2xl text-foreground">The Gap Is Growing Fast</h2>
+  <p>
+    A year ago, this was a theoretical concern. Today it's operational reality.
+  </p>
+  <p>
+    GitHub Copilot's agent mode, Claude Code, and Devin are opening PRs autonomously across thousands of engineering teams. At some companies, AI agents now account for 30–50% of all commits. PR volume has doubled. Review queues are longer. Reviewers are moving faster.
+  </p>
+  <p>The conditions for something to slip through are better than they've ever been.</p>
+  <p>
+    And when it does — when an agent-generated change causes a production incident, fails a compliance audit, or introduces a vulnerability that a proper security review would have caught — the post-mortem will ask: <em>Where was the governance layer?</em>
+  </p>
+  <p className="text-foreground font-medium">CODEOWNERS will have an alibi. It did its job. The gap was upstream.</p>
+
+  <h2 className="pt-6 font-display text-2xl text-foreground">What the Governance Layer Looks Like</h2>
+  <p>The fix isn't to remove CODEOWNERS — it's to add a layer that CODEOWNERS was never built to provide.</p>
+  <p>When an AI agent opens a PR, you need:</p>
+  <ol className="list-decimal pl-6 space-y-3">
+    <li><span className="text-foreground font-medium">Detection</span> — the pipeline identifies it as agent-authored automatically, without relying on the agent to label itself correctly</li>
+    <li><span className="text-foreground font-medium">Policy application</span> — a different, stricter set of rules applies: require a senior reviewer, require two approvals for sensitive paths, block merge to main without security sign-off</li>
+    <li><span className="text-foreground font-medium">Evidence</span> — a tamper-evident record of which policy triggered, who approved, and why — so your next SOC 2 audit has an answer when the assessor asks about AI-generated code</li>
+  </ol>
+  <p>
+    This is what ZeroUI does. It connects to your SCM via webhook — GitHub, GitLab, or Azure DevOps — detects agent-authored PRs the moment they open, applies your policy rules automatically, and logs the full decision trail. No marketplace install. No changes to your existing CODEOWNERS setup. It runs alongside it.
+  </p>
+
+  <h2 className="pt-6 font-display text-2xl text-foreground">The Tuesday Morning Question</h2>
+  <p>
+    Back to that fintech team. After the incident, their VP Eng asked a simple question in the post-mortem: <em>Did anyone know that PR was written by an agent?</em>
+  </p>
+  <p>Nobody had. The reviewer hadn't known to ask. The pipeline hadn't surfaced it. CODEOWNERS had fired and done its job.</p>
+  <p>The code went to production anyway.</p>
+  <p>
+    If your team is running AI coding agents today — and statistically, you are — that question is coming. The only variable is whether you have an answer ready before or after something goes wrong.
+  </p>
+</div>
+
+<div className="mt-16 rounded-2xl border border-border bg-accent/20 p-8">
+  <p className="font-display text-xl text-foreground">Ready to add the governance layer?</p>
+  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+    ZeroUI is in early access for engineering teams running AI coding agents on GitHub, GitLab, and Azure DevOps.
+  </p>
+  
+    href="/#contact"
+    className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+  >
+    Request early access →
+  </a>
+</div>
+
+<p className="mt-12 text-sm text-muted-foreground">
+  <Link to="/blog" className="link-underline text-primary hover:text-primary/90">
+    All posts
+  </Link>
+  {" · "}
+  <Link to="/" className="link-underline hover:text-foreground">
+    Home
+  </Link>
+</p>
+Show me the complete updated file after the change."
+
+---
+
+_**Agent (composer-2)**_
+
+<think><details><summary>Thought Process</summary>
+The user wants me to update the blog post file by adding new head meta and replacing the existing article content.</details></think>
+
+_**Agent (composer-2)**_
+
+Fixing a typo in the pasted CTA: the opening `<a` tag is missing before `href="/#contact"`. Adding `<a` so the markup is valid.
+
+
+
+_**Agent (composer-2)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: d:\Projects\zeroui\src\routes\blog\codeowners-vs-ai-agents.tsx</summary>
+
+</details>
+</tool-use>
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2**</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2)**_
+
+<think><details><summary>Thought Process</summary>
+I'll replace the entire file with the updated version.</details></think>
+
+_**Agent (composer-2)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: d:\Projects\zeroui\src\routes\blog\codeowners-vs-ai-agents.tsx</summary>
+
+</details>
+
+</tool-use>
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2**</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2)**_
+
+<think><details><summary>Thought Process</summary>
+I used &apos; in JSX for apostrophes to prevent eslint react/no-unescaped-entities errors.</details></think>
+
+_**Agent (composer-2)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "d:\\Projects\\zeroui\\src\\routes\\blog\\codeowners-vs-ai-agents.tsx"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "d:\\Projects\\zeroui\\src\\routes\\blog\\codeowners-vs-ai-agents.tsx"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints"><details>
+<summary>Tool use: **read_lints**</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2)**_
+
+<think><details><summary>Thought Process</summary>
+The user requested exact content, so I adjusted apostrophes to entities only in the visible JSX text, while keeping natural apostrophes in meta strings as specified.</details></think>
+
+_**Agent (composer-2)**_
+
+Your paste was missing the opening `<a` on the CTA; it’s now a full `<a href="/#contact" …>`. In the visible `<h1>` and body copy, apostrophes are written as `&apos;` in JSX so the markup stays valid (same wording).
+
+Complete updated file:
+
+```1:199:d:\Projects\zeroui\src\routes\blog\codeowners-vs-ai-agents.tsx
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ThemeToggle } from "@/components/theme-toggle";
+
+export const Route = createFileRoute("/blog/codeowners-vs-ai-agents")({
+  head: () => ({
+    meta: [
+      { title: "Why CODEOWNERS Isn't Enough When Your Developers Are AI Agents — ZeroUI" },
+      {
+        name: "description",
+        content:
+          "CODEOWNERS enforces who reviews code. It doesn't know who wrote it. Here's why that gap matters when AI agents are opening PRs in your repo — and what to do about it.",
+      },
+      { property: "og:title", content: "Why CODEOWNERS Isn't Enough When Your Developers Are AI Agents" },
+      {
+        property: "og:description",
+        content:
+          "CODEOWNERS enforces who reviews code. It doesn't know who wrote it. Here's why that gap matters when AI agents are opening PRs in your repo.",
+      },
+    ],
+  }),
+  component: CodeownersVsAiAgentsPost,
+});
+
+function CodeownersVsAiAgentsPost() {
+  return (
+    <div className="min-h-screen bg-background">
+      <header className="border-b border-border/60 bg-background/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5 lg:px-10">
+          <Link to="/blog" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            ← Blog
+          </Link>
+          <ThemeToggle />
+        </div>
+      </header>
+      <article className="mx-auto max-w-3xl px-6 py-16 lg:px-10 lg:py-24">
+        <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">May 18, 2026</p>
+        <h1 className="mt-4 font-display text-4xl tracking-tight text-foreground lg:text-5xl">
+          Why CODEOWNERS Isn&apos;t Enough When Your Developers Are AI Agents
+        </h1>
+        <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+          It started with a Slack message on a Tuesday morning.
+        </p>
+        <div className="mt-8 space-y-6 text-base leading-relaxed text-muted-foreground">
+          <p>
+            A senior engineer at a fintech startup noticed something odd: a PR touching the payments service had been
+            merged the previous evening. The reviewer was a junior developer who&apos;d approved it in four minutes — at
+            9pm. The PR had 340 lines of changes across six files.
+          </p>
+          <p>
+            No one had flagged it. CODEOWNERS had fired correctly. The right team was requested as reviewers. A human
+            had approved it.
+          </p>
+          <p>
+            But the code had been written entirely by an AI agent. And the junior developer, under deadline pressure, had
+            assumed a senior had already looked at it.
+          </p>
+          <p>They hadn&apos;t.</p>
+
+          <h2 className="pt-6 font-display text-2xl text-foreground">CODEOWNERS Does Exactly What It Was Designed to Do</h2>
+          <p>
+            CODEOWNERS is a well-designed tool. You define which people or teams must approve changes to specific files
+            or directories. GitHub, GitLab, and Azure DevOps all support it. It&apos;s been working reliably for years.
+          </p>
+          <p>
+            The problem isn&apos;t CODEOWNERS. The problem is that CODEOWNERS was designed for a world where humans wrote
+            all the code.
+          </p>
+          <p>
+            In that world, the question was: <em>Did the right person review this?</em>
+          </p>
+          <p>That&apos;s still an important question. But it&apos;s no longer the only one.</p>
+          <p>
+            The new question is: <em>Did the right person review this, knowing that an AI agent wrote it?</em>
+          </p>
+          <p>Those are different questions. And right now, your pipeline only asks the first one.</p>
+
+          <h2 className="pt-6 font-display text-2xl text-foreground">What CODEOWNERS Can&apos;t See</h2>
+          <p>
+            When a Copilot agent, Claude Code, or Devin opens a PR, it looks like any other commit. The author might be
+            a service account, a bot user, or even a developer&apos;s own account if they accepted and pushed the
+            suggestion. CODEOWNERS fires based on which files were changed — not who or what changed them.
+          </p>
+          <p>This creates a gap that&apos;s invisible until something goes wrong:</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>A reviewer sees a PR, assumes a colleague wrote it, and does a surface-level check</li>
+            <li>
+              An agent makes a structural change to auth logic that looks syntactically correct but introduces a logic
+              flaw
+            </li>
+            <li>
+              The policy that should apply to AI-generated changes — require a senior engineer, require two approvals,
+              require a security sign-off — never gets triggered because the pipeline doesn&apos;t know the code came from
+              an agent
+            </li>
+          </ul>
+          <p>
+            Your CODEOWNERS file has no concept of provenance. It can&apos;t distinguish between a principal
+            engineer&apos;s careful refactor and 400 lines generated by an autonomous agent at 2am.
+          </p>
+
+          <h2 className="pt-6 font-display text-2xl text-foreground">The Gap Is Growing Fast</h2>
+          <p>A year ago, this was a theoretical concern. Today it&apos;s operational reality.</p>
+          <p>
+            GitHub Copilot&apos;s agent mode, Claude Code, and Devin are opening PRs autonomously across thousands of
+            engineering teams. At some companies, AI agents now account for 30–50% of all commits. PR volume has doubled.
+            Review queues are longer. Reviewers are moving faster.
+          </p>
+          <p>The conditions for something to slip through are better than they&apos;ve ever been.</p>
+          <p>
+            And when it does — when an agent-generated change causes a production incident, fails a compliance audit, or
+            introduces a vulnerability that a proper security review would have caught — the post-mortem will ask:{" "}
+            <em>Where was the governance layer?</em>
+          </p>
+          <p className="font-medium text-foreground">
+            CODEOWNERS will have an alibi. It did its job. The gap was upstream.
+          </p>
+
+          <h2 className="pt-6 font-display text-2xl text-foreground">What the Governance Layer Looks Like</h2>
+          <p>
+            The fix isn&apos;t to remove CODEOWNERS — it&apos;s to add a layer that CODEOWNERS was never built to provide.
+          </p>
+          <p>When an AI agent opens a PR, you need:</p>
+          <ol className="list-decimal space-y-3 pl-6">
+            <li>
+              <span className="font-medium text-foreground">Detection</span> — the pipeline identifies it as
+              agent-authored automatically, without relying on the agent to label itself correctly
+            </li>
+            <li>
+              <span className="font-medium text-foreground">Policy application</span> — a different, stricter set of
+              rules applies: require a senior reviewer, require two approvals for sensitive paths, block merge to main
+              without security sign-off
+            </li>
+            <li>
+              <span className="font-medium text-foreground">Evidence</span> — a tamper-evident record of which policy
+              triggered, who approved, and why — so your next SOC 2 audit has an answer when the assessor asks about
+              AI-generated code
+            </li>
+          </ol>
+          <p>
+            This is what ZeroUI does. It connects to your SCM via webhook — GitHub, GitLab, or Azure DevOps — detects
+            agent-authored PRs the moment they open, applies your policy rules automatically, and logs the full decision
+            trail. No marketplace install. No changes to your existing CODEOWNERS setup. It runs alongside it.
+          </p>
+
+          <h2 className="pt-6 font-display text-2xl text-foreground">The Tuesday Morning Question</h2>
+          <p>
+            Back to that fintech team. After the incident, their VP Eng asked a simple question in the post-mortem:{" "}
+            <em>Did anyone know that PR was written by an agent?</em>
+          </p>
+          <p>
+            Nobody had. The reviewer hadn&apos;t known to ask. The pipeline hadn&apos;t surfaced it. CODEOWNERS had fired
+            and done its job.
+          </p>
+          <p>The code went to production anyway.</p>
+          <p>
+            If your team is running AI coding agents today — and statistically, you are — that question is coming. The
+            only variable is whether you have an answer ready before or after something goes wrong.
+          </p>
+        </div>
+
+        <div className="mt-16 rounded-2xl border border-border bg-accent/20 p-8">
+          <p className="font-display text-xl text-foreground">Ready to add the governance layer?</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            ZeroUI is in early access for engineering teams running AI coding agents on GitHub, GitLab, and Azure
+            DevOps.
+          </p>
+          <a
+            href="/#contact"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Request early access →
+          </a>
+        </div>
+
+        <p className="mt-12 text-sm text-muted-foreground">
+          <Link to="/blog" className="link-underline text-primary hover:text-primary/90">
+            All posts
+          </Link>
+          {" · "}
+          <Link to="/" className="link-underline hover:text-foreground">
+            Home
+          </Link>
+        </p>
+      </article>
+    </div>
+  );
+}
+```
